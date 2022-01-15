@@ -17,6 +17,11 @@
                     <i class="fas fa-user-circle"></i><span sec:authentication="name"></span>
                 </span>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript: document.logoutForm.submit()">
+                    <i class="fas fa-sign-out-alt"></i>Logout</a>
+                <form type="hidden" name="logoutForm" th:action="@{/logout}" method="post"></form>
+            </li>
         </ul>
         <ul class="navbar-nav ml-auto" sec:authorize="!isAuthenticated()">
             <li class="nav-item">
