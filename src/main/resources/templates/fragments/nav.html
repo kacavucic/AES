@@ -1,7 +1,27 @@
-<nav th:fragment="nav" class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+<nav th:fragment="nav" class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark"
+     xmlns:sec="http://www.w3.org/1999/xhtml">
     <a class="navbar-brand" href="#">AES</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/index}"><i class="fas fa-home"></i>Home</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
+            <li class="nav-item">
+                <span class="navbar-text" sec:authorize="isAuthenticated()">
+                    <i class="fas fa-user-circle"></i><span sec:authentication="name"></span>
+                </span>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" sec:authorize="!isAuthenticated()">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}"><i class="fas fa-sign-in-alt"></i>Log In</a>
+            </li>
+        </ul>
+    </div>
 </nav>
