@@ -8,15 +8,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -26,6 +24,7 @@ public class UsersController {
     public static final String REDIRECT_ADMIN_PAGE_USERS = "redirect:/adminPage/users";
 
     private final UserService userService;
+    private final UserDtoService userDtoService;
 
     @GetMapping("/users")
     public ModelAndView getUsers(ModelAndView modelAndView) {
@@ -37,6 +36,7 @@ public class UsersController {
         model.addAttribute("newUser", new UserDto());
         return "adminPage/user/newUser";
     }
+
     @PostMapping("/users/newUser")
     public String saveNewUser(@ModelAttribute("newUser") @Valid UserDto newUser,
                               BindingResult bindingResult,
@@ -64,5 +64,49 @@ public class UsersController {
         userService.save(user);
         redirectAttributes.addFlashAttribute("userHasBeenSaved", true);
         return REDIRECT_ADMIN_PAGE_USERS;
+    }
+
+    @GetMapping("/users/editUser/{id}")
+    public String getAddEditUserForm(Model model, @PathVariable Long id) {
+        Optional<UserDto> editUser = userDtoService.findById(id);
+        model.addAttribute("editUser", editUser.get());
+        return "adminPage/user/editUser";
+    }
+    @PostMapping("/users/editUser")
+    public String editUser(@ModelAttribute("editUser") @Valid UserDto editUser,
+                           BindingResult bindingResult,
+                           RedirectAttributes redirectAttributes) throws MessagingException {
+
+        User emailExists = userService.findByEmail(editUser.getEmail());
+        User usernameExists = userService.findByUsername(editUser.getUsername());
+        User mobileExists = userService.findByMobile(editUser.getMobile());
+
+
+        if (emailExists != null && emailExists.getId() != editUser.getId()) {
+            bindingResult.rejectValue("email", "emailAlreadyExists");
+        }
+
+        if (usernameExists != null && usernameExists.getId() != editUser.getId()) {
+            bindingResult.rejectValue("username", "usernameAlreadyExists");
+        }
+
+        if (mobileExists != null && mobileExists.getId() != editUser.getId()) {
+            bindingResult.rejectValue("mobile", "mobileAlreadyExists");
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "adminPage/user/editUser";
+        } else {
+
+            try {
+                User user = userService.updateUser(editUser);
+                userService.save(user);
+            } catch (IllegalArgumentException e) {
+                //
+            }
+            redirectAttributes.addFlashAttribute("userHasBeenEdited", true);
+            return REDIRECT_ADMIN_PAGE_USERS;
+        }
+
     }
 }
