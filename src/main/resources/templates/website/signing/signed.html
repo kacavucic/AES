@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"><title>Registered</title></head>
+<body>
+<nav th:replace="fragments/nav :: nav"></nav>
+<div class="dark-overlay">
+    <div class="home-inner">
+        <div class="container">
+            <div class="row">
+                <div class="jumbotron col-md-10 offset-md-1">
+                    <h1>Document signing completed!</h1>
+                    <hr>
+                    <p th:text="${confirmationMessage}" class="lead"></p>
+                    <a th:href="${documentPath}" download="AES.pdf" class="btn download-button">
+                        <i class="fas fa-download"></i>Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
+<div th:replace="fragments/jsScripts :: scripts"></div>
+</body>
+</html>
