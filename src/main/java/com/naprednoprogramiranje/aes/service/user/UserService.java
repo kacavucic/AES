@@ -1,6 +1,7 @@
 package com.naprednoprogramiranje.aes.service.user;
 
 import com.naprednoprogramiranje.aes.model.User;
+import com.naprednoprogramiranje.aes.web.model.UserDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,5 +23,7 @@ public interface UserService {
     void save(User user);
 
     void deleteById(Long id);
+
+    User createNewAccount(UserDto userDto);
 
 }
