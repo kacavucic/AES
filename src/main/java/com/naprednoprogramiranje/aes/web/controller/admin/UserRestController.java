@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
@@ -33,4 +34,14 @@ public class UserRestController {
         return userRepository.findAll(input);
     }
 
+    @DeleteMapping("/adminPage/json-users/delete/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable Long id) {
+        Optional<User> userToDelete = userService.findById(id);
+
+        if (userToDelete.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        userService.deleteById(id);
+        return new ResponseEntity<>(userToDelete.get(), HttpStatus.NO_CONTENT);
+    }
 }
