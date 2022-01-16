@@ -10,8 +10,8 @@
                 <div class="jumbotron col-md-10 offset-md-1">
                     <h1>Document signing completed!</h1>
                     <hr>
-                    <p th:text="${confirmationMessage}" class="lead"></p>
-                    <a th:href="${documentPath}" download="AES.pdf" class="btn download-button">
+                    <p class="lead" th:text="${confirmationMessage}"></p>
+                    <a class="btn download-button" download="AES.pdf" th:href="${documentPath}">
                         <i class="fas fa-download"></i>Download</a>
                 </div>
             </div>

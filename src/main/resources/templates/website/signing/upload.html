@@ -12,20 +12,21 @@
                     <div class="card-body">
                         <h4>Upload Document for Signing</h4>
                         <hr>
-                        <form th:action="@{/upload-document}" th:object="${documentDto}" method="post"
-                              enctype="multipart/form-data">
-                            <ul th:if="${#fields.hasErrors('global')}" class="global-errors">
-                                <li th:each="err : ${#fields.errors('global')}" th:text="${err}" class="text-danger">
+                        <form enctype="multipart/form-data" method="post" th:action="@{/upload-document}"
+                              th:object="${documentDto}">
+                            <ul class="global-errors" th:if="${#fields.hasErrors('global')}">
+                                <li class="text-danger" th:each="err : ${#fields.errors('global')}" th:text="${err}">
                                     Input is incorrect!
                                 </li>
                             </ul>
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input id="document" type="file" class="custom-file-input" name="document" required>
+                                        <input class="custom-file-input" id="document" name="document" required
+                                               type="file">
                                         <label class="custom-file-label">Choose file...</label>
-                                        <p th:if="${#fields.hasErrors('document')}"
-                                           th:errors="*{document}" class="text-danger"></p>
+                                        <p class="text-danger"
+                                           th:errors="*{document}" th:if="${#fields.hasErrors('document')}"></p>
                                     </div>
                                 </div>
                             </div>

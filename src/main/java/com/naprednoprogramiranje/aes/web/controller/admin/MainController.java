@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
 
     @GetMapping("")
-    public ModelAndView adminPage(){
+    public ModelAndView adminPage() {
         return new ModelAndView("redirect:/adminPage/users");
     }
 }

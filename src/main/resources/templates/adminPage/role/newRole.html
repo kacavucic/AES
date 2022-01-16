@@ -11,18 +11,18 @@
                     <div class="card-body">
                         <h4>Add New Role</h4>
                         <hr>
-                        <form th:action="@{/adminPage/roles/newRole}" th:object="${newRole}" method="post">
-                            <ul th:if="${#fields.hasErrors('global')}" class="global-errors">
-                                <li th:each="err : ${#fields.errors('global')}" th:text="${err}" class="text-danger">
+                        <form method="post" th:action="@{/adminPage/roles/newRole}" th:object="${newRole}">
+                            <ul class="global-errors" th:if="${#fields.hasErrors('global')}">
+                                <li class="text-danger" th:each="err : ${#fields.errors('global')}" th:text="${err}">
                                     Input is incorrect!
                                 </li>
                             </ul>
                             <div class="form-group">
                                 <label class="lead">Role Name</label>
-                                <input type="text" class="form-control" th:field="*{roleName}" id="roleName"
-                                       placeholder="Enter role name" required>
-                                <p th:if="${#fields.hasErrors('roleName')}" th:errors="*{roleName}"
-                                   class="text-danger"></p>
+                                <input class="form-control" id="roleName" placeholder="Enter role name" required
+                                       th:field="*{roleName}" type="text">
+                                <p class="text-danger" th:errors="*{roleName}"
+                                   th:if="${#fields.hasErrors('roleName')}"></p>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">Submit</button>

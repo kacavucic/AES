@@ -31,6 +31,7 @@ public class UsersController {
         modelAndView.setViewName("adminPage/user/users");
         return modelAndView;
     }
+
     @GetMapping("/users/newUser")
     public String getAddNewUserForm(Model model) {
         model.addAttribute("newUser", new UserDto());
@@ -72,6 +73,7 @@ public class UsersController {
         model.addAttribute("editUser", editUser.get());
         return "adminPage/user/editUser";
     }
+
     @PostMapping("/users/editUser")
     public String editUser(@ModelAttribute("editUser") @Valid UserDto editUser,
                            BindingResult bindingResult,

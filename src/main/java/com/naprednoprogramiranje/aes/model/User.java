@@ -49,8 +49,8 @@ public class User {
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "USER_ROLE",
-            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName="ID")},
-            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName="ID")})
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
     private List<Role> roles;
 
     @SuppressWarnings("CopyConstructorMissesField")

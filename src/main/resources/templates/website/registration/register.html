@@ -11,61 +11,61 @@
                     <div class="card-body">
                         <h4>Registration form</h4>
                         <hr>
-                        <form id="registration" th:action="@{/submit-registration}"
-                              th:object="${userDto}" method="post">
-                            <ul th:if="${#fields.hasErrors('global')}" class="global-errors">
-                                <li th:each="err : ${#fields.errors('global')}" th:text="${err}" class="text-danger">
+                        <form id="registration" method="post"
+                              th:action="@{/submit-registration}" th:object="${userDto}">
+                            <ul class="global-errors" th:if="${#fields.hasErrors('global')}">
+                                <li class="text-danger" th:each="err : ${#fields.errors('global')}" th:text="${err}">
                                     Input is incorrect!
                                 </li>
                             </ul>
 
                             <div class="form-group">
                                 <label class="lead">First Name</label>
-                                <input type="text" class="form-control" th:field="*{firstName}" id="firstName"
-                                       placeholder="Enter first name" required>
-                                <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
-                                   class="text-danger"></p>
+                                <input class="form-control" id="firstName" placeholder="Enter first name" required
+                                       th:field="*{firstName}" type="text">
+                                <p class="text-danger" th:errors="*{firstName}"
+                                   th:if="${#fields.hasErrors('firstName')}"></p>
                             </div>
 
                             <div class="form-group">
                                 <label class="lead">Last Name</label>
-                                <input type="text" class="form-control" th:field="*{lastName}" id="lastName"
-                                       placeholder="Enter last name" required>
-                                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-                                   class="text-danger"></p>
+                                <input class="form-control" id="lastName" placeholder="Enter last name" required
+                                       th:field="*{lastName}" type="text">
+                                <p class="text-danger" th:errors="*{lastName}"
+                                   th:if="${#fields.hasErrors('lastName')}"></p>
                             </div>
 
                             <div class="form-group">
                                 <label class="lead">Username</label>
-                                <input type="text" class="form-control" th:field="*{username}" id="username"
-                                       placeholder="Enter username" required>
-                                <p th:if="${#fields.hasErrors('username')}"
-                                   th:errors="*{username}" class="text-danger"></p>
+                                <input class="form-control" id="username" placeholder="Enter username" required
+                                       th:field="*{username}" type="text">
+                                <p class="text-danger"
+                                   th:errors="*{username}" th:if="${#fields.hasErrors('username')}"></p>
                             </div>
 
                             <div class="form-group">
                                 <label class="lead">Email address</label>
-                                <input th:type="email" type="email" class="form-control" th:field="*{email}" id="email"
-                                       placeholder="Enter email" required>
-                                <span th:if="${#fields.hasErrors('email')}"
-                                      th:errors="*{email}" class="text-danger"></span>
+                                <input class="form-control" id="email" placeholder="Enter email" required th:field="*{email}"
+                                       th:type="email" type="email">
+                                <span class="text-danger"
+                                      th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></span>
                             </div>
 
                             <div class="form-group">
                                 <label class="lead">Password</label>
-                                <input type="password" class="form-control" th:field="*{password}" id="password"
-                                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,128}"
-                                       title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-                                       placeholder="Enter password" required>
-                                <p th:if="${#fields.hasErrors('password')}"
-                                   th:errors="*{password}" class="text-danger"></p>
+                                <input class="form-control" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,128}" placeholder="Enter password"
+                                       required
+                                       th:field="*{password}"
+                                       title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" type="password">
+                                <p class="text-danger"
+                                   th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
                             </div>
 
                             <div class="form-group">
                                 <label class="lead">Mobile</label>
-                                <input type="tel" class="form-control" th:field="*{mobile}" id="mobile"
-                                       onfocusout="validateMobile()" required>
-                                <p th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}" class="text-danger"></p>
+                                <input class="form-control" id="mobile" onfocusout="validateMobile()" required
+                                       th:field="*{mobile}" type="tel">
+                                <p class="text-danger" th:errors="*{mobile}" th:if="${#fields.hasErrors('mobile')}"></p>
                             </div>
 
                             <div class="form-group">

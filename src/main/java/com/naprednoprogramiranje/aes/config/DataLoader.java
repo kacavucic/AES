@@ -16,10 +16,10 @@ import java.util.List;
 @Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
-    private boolean alreadySetup = false;
     private final UserService userService;
     private final RoleService roleService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private boolean alreadySetup = false;
 
     public DataLoader(UserService userService, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userService = userService;

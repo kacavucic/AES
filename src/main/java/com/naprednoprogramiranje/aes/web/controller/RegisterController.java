@@ -66,6 +66,7 @@ public class RegisterController {
 
         return modelAndView;
     }
+
     @PostMapping(value = "/verify-registration")
     public ModelAndView verifyRegistration(ModelAndView modelAndView,
                                            @ModelAttribute("codeVerificationDto") @Valid final CodeVerificationDto codeVerificationDto,

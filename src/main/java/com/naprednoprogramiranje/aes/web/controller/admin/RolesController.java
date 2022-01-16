@@ -34,8 +34,7 @@ public class RolesController {
 
     @GetMapping("/roles/newRole")
     public String getAddNewRoleForm(Model model) {
-        model.addAttribute("newRole", new RoleDto()
-        );
+        model.addAttribute("newRole", new RoleDto());
         return "adminPage/role/newRole";
     }
 
@@ -54,4 +53,5 @@ public class RolesController {
         redirectAttributes.addFlashAttribute("roleHasBeenSaved", true);
         return REDIRECT_ADMIN_PAGE_ROLES;
     }
+
 }

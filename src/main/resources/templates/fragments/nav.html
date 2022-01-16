@@ -1,8 +1,8 @@
-<nav th:fragment="nav" class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark"
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" th:fragment="nav"
      xmlns:sec="http://www.w3.org/1999/xhtml">
     <a class="navbar-brand" href="#">AES</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-bs-target="#navbarContent" data-bs-toggle="collapse" type="button">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarContent">
@@ -11,9 +11,9 @@
                 <a class="nav-link" th:href="@{/index}"><i class="fas fa-home"></i>Home</a>
             </li>
             <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu" role="button" data-toggle="dropdown"
-                   aria-expanded="false"><i class="fas fa-users-cog"></i>Admin Page</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                <a aria-expanded="false" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="dropdownMenu"
+                   role="button"><i class="fas fa-users-cog"></i>Admin Page</a>
+                <div aria-labelledby="dropdownMenu" class="dropdown-menu">
                     <a class="dropdown-item" th:href="@{/adminPage/users}"><i class="fas fa-users"></i>Users</a>
                     <a class="dropdown-item" th:href="@{/adminPage/roles}"><i class="fas fa-user-shield"></i>Roles</a>
                 </div>
@@ -31,7 +31,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="javascript: document.logoutForm.submit()">
                     <i class="fas fa-sign-out-alt"></i>Logout</a>
-                <form type="hidden" name="logoutForm" th:action="@{/logout}" method="post"></form>
+                <form method="post" name="logoutForm" th:action="@{/logout}" type="hidden"></form>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto" sec:authorize="!isAuthenticated()">

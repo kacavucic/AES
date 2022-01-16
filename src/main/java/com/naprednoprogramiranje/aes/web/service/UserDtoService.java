@@ -10,11 +10,13 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static com.naprednoprogramiranje.aes.web.mapper.Mapper.*;
+import static com.naprednoprogramiranje.aes.web.mapper.Mapper.convertToDto;
+import static com.naprednoprogramiranje.aes.web.mapper.Mapper.convertToDtoList;
 
 @Service
 @AllArgsConstructor
 @Transactional
+@Slf4j
 public class UserDtoService {
 
     private final UserService userService;

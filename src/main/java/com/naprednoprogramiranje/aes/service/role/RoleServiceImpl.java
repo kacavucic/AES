@@ -3,6 +3,7 @@ package com.naprednoprogramiranje.aes.service.role;
 import com.naprednoprogramiranje.aes.model.Role;
 import com.naprednoprogramiranje.aes.repository.RoleRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 @Transactional
+@Slf4j
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
