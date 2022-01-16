@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"><title>Registered</title></head>
+<body>
+<nav th:replace="fragments/nav :: nav"></nav>
+<div class="dark-overlay">
+    <div class="home-inner">
+        <div class="container">
+            <div class="row">
+                <div class="jumbotron col-md-10 offset-md-1">
+                    <h1>Registration completed</h1>
+                    <hr>
+                    <p th:text="${confirmationMessage}" class="lead">You have been registered successfully.</p>
+                    <button class="btn btn-primary" type="button" onclick="location.href='/login.html'">Log In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
+<div th:replace="fragments/jsScripts :: scripts"></div>
+</body>
+</html>

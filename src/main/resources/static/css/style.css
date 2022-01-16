@@ -95,6 +95,10 @@ footer {
     float: left;
 }
 
+.form-group .iti {
+    display: block;
+}
+
 i {
     color: lightgrey;
 }
