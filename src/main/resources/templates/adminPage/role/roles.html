@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"><title>Roles</title></head>
+<body>
+<nav th:replace="fragments/nav :: nav"></nav>
+<div class="dark-overlay">
+    <div class="home-inner">
+        <div class="container">
+            <div class="row">
+                <div class="card col-xs-12 table-container">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <table class="table table-striped table-responsive">
+                                    <thead class="thead">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Role Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="role : ${roles}">
+                                        <td th:text="${role.id}"></td>
+                                        <td th:text="${role.roleName}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a th:href="@{/adminPage/roles/newRole}">
+                                    <button type="button" class="btn btn-primary">New Role</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
+<div th:replace="fragments/jsScripts :: scripts"></div>
+</body>
+</html>

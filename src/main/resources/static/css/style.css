@@ -99,6 +99,10 @@ footer {
     display: block;
 }
 
+.container .table-container {
+    margin: 0 auto;
+}
+
 i {
     color: lightgrey;
 }
@@ -106,6 +110,10 @@ i {
 .navbar-text {
     padding-left: 8px;
     padding-right: 8px;
+}
+
+tr, td {
+    text-align: center;
 }
 
 .fas {
