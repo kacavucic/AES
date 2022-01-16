@@ -97,6 +97,11 @@
             <version>7.1.16</version>
             <type>pom</type>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>15.0</version>
+        </dependency>
     </dependencies>
 
     <build>
