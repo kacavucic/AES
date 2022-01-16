@@ -19,6 +19,7 @@ public class IndexController {
     public String login() {
         return "website/login";
     }
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         UserDto userDto = new UserDto();
