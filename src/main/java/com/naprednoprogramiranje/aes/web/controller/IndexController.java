@@ -1,5 +1,6 @@
 package com.naprednoprogramiranje.aes.web.controller;
 
+import com.naprednoprogramiranje.aes.web.model.DocumentDto;
 import com.naprednoprogramiranje.aes.web.model.UserDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,5 +26,12 @@ public class IndexController {
         UserDto userDto = new UserDto();
         model.addAttribute("userDto", userDto);
         return "website/registration/register";
+    }
+
+    @GetMapping("/upload")
+    public String showUploadDocumentForm(Model model) {
+        DocumentDto documentDto = new DocumentDto();
+        model.addAttribute("documentDto", documentDto);
+        return "website/signing/upload";
     }
 }
