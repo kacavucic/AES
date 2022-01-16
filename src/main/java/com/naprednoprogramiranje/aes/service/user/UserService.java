@@ -26,4 +26,6 @@ public interface UserService {
 
     User createNewAccount(UserDto userDto);
 
+    User updateUser(UserDto userDto);
+
 }

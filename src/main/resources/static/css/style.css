@@ -99,6 +99,10 @@ footer {
     display: block;
 }
 
+.container .table-container {
+    margin: 0 auto;
+}
+
 i {
     color: lightgrey;
 }
@@ -106,6 +110,10 @@ i {
 .navbar-text {
     padding-left: 8px;
     padding-right: 8px;
+}
+
+tr, td {
+    text-align: center;
 }
 
 .fas {
@@ -117,3 +125,29 @@ i {
     color: dimgrey;
 }
 
+.remove-user {
+    border: none;
+    background-color: transparent;
+    color: rgba(255, 0, 0, 0.64);
+}
+
+.edit-user {
+    border: none;
+    background-color: transparent;
+    color: rgba(45, 41, 41, 0.64);
+
+}
+
+.download-button{
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 20px;
+    float: right;
+}
+
+.download-button:hover {
+    background-color: RoyalBlue;
+}

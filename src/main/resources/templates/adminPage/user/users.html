@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"><title>Users</title>/>
+</head>
+<body>
+<nav th:replace="fragments/nav :: nav"></nav>
+<div class="dark-overlay">
+    <div class="home-inner">
+        <div class="container ">
+            <div class="row">
+                <div class="card col-xs-12 table-container">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <table class="table table-responsive" style="width:100%" id="user-table">
+                                    <thead class="thead">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Mobile</th>
+                                        <th>Enabled</th>
+                                        <th>Edit</th>
+                                        <th>Remove</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mt-3">
+                                <a th:href="@{/adminPage/users/newUser}">
+                                    <button type="button" class="btn btn-primary">New User</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/deleteUserModal :: delete-user-modal"></div>
+<footer th:replace="fragments/footer :: footer"></footer>
+<div th:replace="fragments/jsScripts :: scripts"></div>
+<script>
+    $(document).ready(function () {
+        $('table#user-table').DataTable({
+            ajax: '/users',
+            serverSide: true,
+            columns: [
+                {
+                    data: 'id',
+                },
+                {
+                    data: 'firstName',
+                },
+                {data: 'lastName'},
+                {data: 'username'},
+                {
+                    data: 'email',
+                    orderable: false
+                },
+                {
+                    data: 'mobile',
+                    orderable: false
+                },
+                {
+                    data: 'enabled',
+                    orderable: true,
+                    render: function (data, type) {
+                        if (type === 'display') {
+                            if (data) {
+                                color = 'green';
+                                text = 'Enabled';
+                            } else {
+                                color = 'red';
+                                text = 'Disabled';
+                            }
+                            return '<span style="color:' + color + '">' + text + '</span>';
+                        }
+                        return data;
+                    }
+                },
+                {
+                    data: 'id',
+                    orderable: false,
+                    render: function (data, type) {
+                        return `<a href="/adminPage/users/editUser/${data}"><button
+                                class="fas fa-user-edit edit-user"
+                                data-placement="right" title="Edit user">
+                                </button></a>`;
+                    }
+                },
+                {
+                    data: 'id',
+                    orderable: false,
+                    render: function (data, type) {
+                        return `<button
+                                class="fas fa-user-times remove-user"
+                                data-toggle="modal" data-target="#deleteModal"
+                                data-placement="right" title="Remove user"
+                                onclick="setRowIndexAndUserId(${data})">
+                                </button>`;
+                    }
+                }
+            ]
+        });
+    });
+</script>
+</body>
+</html>
+
+
+
