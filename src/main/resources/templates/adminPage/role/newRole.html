@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"><title>New Role</title></head>
+<body>
+<nav th:replace="fragments/nav :: nav"></nav>
+<div class="dark-overlay">
+    <div class="home-inner">
+        <div class="container">
+            <div class="row">
+                <div class="card col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+                    <div class="card-body">
+                        <h4>Add New Role</h4>
+                        <hr>
+                        <form th:action="@{/adminPage/roles/newRole}" th:object="${newRole}" method="post">
+                            <ul th:if="${#fields.hasErrors('global')}" class="global-errors">
+                                <li th:each="err : ${#fields.errors('global')}" th:text="${err}" class="text-danger">
+                                    Input is incorrect!
+                                </li>
+                            </ul>
+                            <div class="form-group">
+                                <label class="lead">Role Name</label>
+                                <input type="text" class="form-control" th:field="*{roleName}" id="roleName"
+                                       placeholder="Enter role name" required>
+                                <p th:if="${#fields.hasErrors('roleName')}" th:errors="*{roleName}"
+                                   class="text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-dark" th:href="@{/adminPage/roles}">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
+<div th:replace="fragments/jsScripts :: scripts"></div>
+</body>
+</html>
