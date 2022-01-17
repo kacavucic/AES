@@ -22,7 +22,7 @@ import java.security.cert.Certificate;
 import java.util.UUID;
 
 public class SigningService {
-    final String DEST = "src/main/resources/result/";
+    final String DEST = "src/main/resources/static/";
     final String KEYSTORE = "src/main/resources/encryption/keystore.jks";
     final char[] PASSWORD = "katarina".toCharArray();
 

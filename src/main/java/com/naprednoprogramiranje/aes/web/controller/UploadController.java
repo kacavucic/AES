@@ -120,7 +120,8 @@ public class UploadController {
                 GeoIP geoIP = locationService.getLocation("87.116.160.153");
                 String location = geoIP.getCity();
 
-                HashCode hash = Files.hash(new File(session.getFilepath()), Hashing.md5());
+                File signingFile = new File(session.getFilepath());
+                HashCode hash = Files.hash(signingFile, Hashing.md5());
 
                 String reason = "On behalf of " + user.getFirstName() + " " + user.getLastName() + "\n"
                         + "Using OTC " + session.getOtcCode() + " and timestamp " + session.getTimestamp() + "\n" +
@@ -128,9 +129,10 @@ public class UploadController {
 
                 SigningService signingService = new SigningService();
                 String dest = signingService.sign(src, reason, location);
+                File signed = new File(dest);
                 ///////////////////////////////////////////////////
                 modelAndView.addObject("confirmationMessage", user.getFirstName() + ", AES has successfully signed document " + src.getFileName().toString() + " on your behalf!");
-                modelAndView.addObject("documentPath", dest);
+                modelAndView.addObject("documentPath", signed.getName());
                 modelAndView.setViewName("website/signing/signed");
             }
 

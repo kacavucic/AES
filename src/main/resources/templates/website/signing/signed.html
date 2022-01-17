@@ -11,7 +11,7 @@
                     <h1>Document signing completed!</h1>
                     <hr>
                     <p class="lead" th:text="${confirmationMessage}"></p>
-                    <a class="btn download-button" download="AES.pdf" th:href="${documentPath}">
+                    <a class="btn download-button" th:download="${documentPath}" th:href="${documentPath}">
                         <i class="fas fa-download"></i>Download</a>
                 </div>
             </div>
