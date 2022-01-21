@@ -1,7 +1,10 @@
 package com.naprednoprogramiranje.aes.service.signing;
 
 import com.itextpdf.kernel.colors.DeviceRgb;
+import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.geom.Rectangle;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfDocumentInfo;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.StampingProperties;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
@@ -45,10 +48,11 @@ public class SigningService {
 
         PdfReader reader = new PdfReader(src.toString());
         PdfSigner signer = new PdfSigner(reader, new FileOutputStream(finalDest), new StampingProperties());
+        PdfDocument pdfDocument = new PdfDocument(new PdfReader(src.toString()));
 
         PdfSignatureAppearance appearance = signer.getSignatureAppearance();
         appearance.setPageRect(new Rectangle(293, 16, 303, 101));
-        appearance.setPageNumber(1);
+        appearance.setPageNumber(pdfDocument.getNumberOfPages());
         appearance.setRenderingMode(PdfSignatureAppearance.RenderingMode.DESCRIPTION);
         appearance.setReason(reason);
         appearance.setLocation(location);
