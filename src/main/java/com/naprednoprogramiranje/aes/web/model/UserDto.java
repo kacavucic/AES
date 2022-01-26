@@ -17,7 +17,7 @@ public class UserDto {
 
     private Long id;
 
-    @NotBlank(message = "First name is required")
+    @NotBlank(message = "First name is required") // TODO Koristi NotNull umesto NotBlank
     private String firstName;
 
     @NotBlank(message = "Last name is required")

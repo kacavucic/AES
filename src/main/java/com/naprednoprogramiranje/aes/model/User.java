@@ -1,10 +1,12 @@
 package com.naprednoprogramiranje.aes.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.naprednoprogramiranje.aes.util.Validators;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,8 +14,9 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Getter
-@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "users")
 public class User {
@@ -53,17 +56,27 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
     private List<Role> roles;
 
-    @SuppressWarnings("CopyConstructorMissesField")
-    @Builder
-    public User(User user) {
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.roles = user.getRoles();
-        this.enabled = user.isEnabled();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.email = user.getEmail();
-        this.mobile = user.getMobile();
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
+    public static UserBuilder builder() {
+        return new CustomBuilder();
+    }
+
+    private static class CustomBuilder extends UserBuilder {
+
+        public User build() {
+            Validators.validateFirstname(super.firstName);
+            Validators.validateLastName(super.lastName);
+            Validators.validateUsername(super.username);
+            Validators.validateEmail(super.email);
+            Validators.validatePassword(super.password);
+            Validators.validateMobile(super.mobile);
+
+            super.password = new BCryptPasswordEncoder().encode(super.password);
+
+            return super.build();
+        }
+    }
 }

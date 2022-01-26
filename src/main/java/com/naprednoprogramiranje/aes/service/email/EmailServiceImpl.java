@@ -1,11 +1,11 @@
 package com.naprednoprogramiranje.aes.service.email;
 
-
 import com.naprednoprogramiranje.aes.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -20,7 +20,7 @@ public class EmailServiceImpl implements EmailService {
 
     private final JavaMailSender emailSender;
 
-    private final SpringTemplateEngine thymeleafTemplateEngine;
+    private final ITemplateEngine thymeleafTemplateEngine;
 
     @Override
     public void sendRegistrationEmail(User user, String code) throws MessagingException {
@@ -43,7 +43,6 @@ public class EmailServiceImpl implements EmailService {
     public void sendSigningEmail(User user, String code)
             throws MessagingException {
 
-
         Context context = new Context();
         context.setVariable("user", user);
         context.setVariable("code", code);
@@ -59,5 +58,4 @@ public class EmailServiceImpl implements EmailService {
         //helper.addInline("attachment.png", resourceFile);
         emailSender.send(message);
     }
-
 }

@@ -18,13 +18,11 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     private final UserService userService;
     private final RoleService roleService;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private boolean alreadySetup = false;
 
-    public DataLoader(UserService userService, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public DataLoader(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -41,12 +39,12 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         List<Role> rolesUser = new ArrayList<>();
         rolesUser.add(roleUser);
 
-        createUserIfNotFound("admin@gmail.com", "Admin", "Admin", "admin", "admin", "0", rolesAdmin);
-        createUserIfNotFound("vucic.kat@gmail.com", "Katarina", "Vucic", "kacavucic", "kaca", "+381693724133", rolesUser);
-        createUserIfNotFound("kaca.kaca.kaca.kaca@gmail.com", "Ana", "Vucic", "anavucic", "ana", "+381693724132", rolesUser);
+        createUserIfNotFound("admin@gmail.com", "Admin", "Admin", "admin", "Abc123$$$", "0", rolesAdmin);
+        // createUserIfNotFound("vucic.kat@gmail.com", "Katarina", "Vucic", "kacavucic", "Abc123$$$", "+381693724133", rolesUser);
+        createUserIfNotFound("kaca.kaca.kaca.kaca@gmail.com", "Ana", "Vucic", "anavucic", "Abc123$$$", "+381693724132", rolesUser);
 
         for (int i = 1; i < 5; i++)
-            createUserIfNotFound("user" + i + "@gmail.com", "User" + i, "User" + i, "user" + i, "user" + i, i + "", rolesUser);
+            createUserIfNotFound("user" + i + "@gmail.com", "User" + i, "User" + i, "user" + i, "Abc123$$$" + i, i + "", rolesUser);
         alreadySetup = true;
     }
 
@@ -54,7 +52,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     Role createRoleIfNotFound(final String roleName) {
         Role role = roleService.findByRoleName(roleName);
         if (role == null) {
-            role = new Role(roleName);
+            role = Role.builder()
+                    .roleName(roleName)
+                    .build();
             roleService.save(role);
         }
         return role;
@@ -70,15 +70,16 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                               final List<Role> userRoles) {
         User user = userService.findByEmail(email);
         if (user == null) {
-            user = new User();
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setUsername(username);
-            user.setPassword(bCryptPasswordEncoder.encode(password));
-            user.setEmail(email);
-            user.setRoles(userRoles);
-            user.setMobile(mobile);
-            user.setEnabled(true);
+            user = User.builder()
+                    .firstName(firstName)
+                    .lastName(lastName)
+                    .username(username)
+                    .password(password)
+                    .email(email)
+                    .roles(userRoles)
+                    .mobile(mobile)
+                    .enabled(true)
+                    .build();
             userService.save(user);
         }
     }

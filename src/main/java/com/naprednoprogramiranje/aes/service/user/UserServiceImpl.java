@@ -66,16 +66,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createNewAccount(UserDto userDto) {
-        User user = new User();
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        user.setUsername(userDto.getUsername());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-        user.setEnabled(userDto.isEnabled());
-        user.setMobile(userDto.getMobile());
-        user.setRoles(Collections.singletonList(roleService.findByRoleName("ROLE_USER")));
-        return user;
+        return User.builder()
+                .firstName(userDto.getFirstName())
+                .lastName(userDto.getLastName())
+                .username(userDto.getUsername())
+                .email(userDto.getEmail())
+                .password(bCryptPasswordEncoder.encode(userDto.getPassword()))
+                .enabled(userDto.isEnabled())
+                .mobile(userDto.getMobile())
+                .roles(Collections.singletonList(roleService.findByRoleName("ROLE_USER")))
+                .build();
     }
 
     @Override
@@ -84,16 +84,14 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new IllegalArgumentException("User not found for provided user id");
         }
-
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        user.setUsername(userDto.getUsername());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-        //user.setEnabled(userDto.isEnabled());
-        user.setMobile(userDto.getMobile());
-        //user.setRoles(Collections.singletonList(roleService.findByRoleName("ROLE_USER")));
-        return user;
+        return User.builder()
+                .firstName(userDto.getFirstName())
+                .lastName(userDto.getLastName())
+                .username(userDto.getUsername())
+                .email(userDto.getEmail())
+                .password(bCryptPasswordEncoder.encode(userDto.getPassword()))
+                .mobile(userDto.getMobile())
+                .build();
     }
 
 }
