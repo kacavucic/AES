@@ -42,7 +42,6 @@ class EmailServiceImplTest {
 
     @Test
     void sendRegistrationEmail() throws MessagingException {
-        // Arrange
         when(templateEngine.process(eq("registrationEmail.html"), any(IContext.class)))
                 .thenReturn("Registration mail sent");
         when(mailSender.createMimeMessage())
@@ -56,10 +55,8 @@ class EmailServiceImplTest {
                 .password("Abc123123!")
                 .build();
 
-        // Act
         emailService.sendRegistrationEmail(user, "123");
 
-        // Assert
         verify(mailSender, times(1)).send(emailCaptor.capture());
 
         MimeMessage msg = emailCaptor.getValue();

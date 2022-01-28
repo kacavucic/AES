@@ -42,16 +42,16 @@ public class SigningServiceTest {
         PdfDocument pdfDoc = new PdfDocument(new PdfReader(outPdfPath));
         SignatureUtil util = new SignatureUtil(pdfDoc);
         // has target signature field name
-        assertTrue(util.doesSignatureFieldExist(signatureFieldName), "Signature field doesn't exist");
+        assertTrue(util.doesSignatureFieldExist(signatureFieldName), "Signature exists");
         // test fields
         PdfSignature sig = util.getSignature(signatureFieldName);
-        assertEquals(sig.getReason(), reason, "Reason in the signature is not valid");
-        assertEquals(sig.getLocation(), location, "Location in the signature is not valid");
+        assertEquals(sig.getReason(), reason, "Reason in the signature is valid");
+        assertEquals(sig.getLocation(), location, "Location in the signature is valid");
         // test certificate details
         String certSubject = util.readSignatureData(signatureFieldName).getSigningCertificate().getSubjectX500Principal().getName();
-        assertEquals(certSubject, certSubjectName, "Certificate subject doesn't match");
+        assertEquals(certSubject, certSubjectName, "Certificate subject matches");
 
-        //close file
+        // close file
         pdfDoc.close();
     }
 

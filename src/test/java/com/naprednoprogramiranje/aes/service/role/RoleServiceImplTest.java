@@ -51,7 +51,7 @@ class RoleServiceImplTest {
                         .build()
                 ));
         List<Role> retrievedRoles = roleService.findAll();
-        assertTrue(retrievedRoles.size() == 3, "Number of retrieved roles is not valid");
+        assertTrue(retrievedRoles.size() == 3, "Number of retrieved roles is valid");
     }
 
     @Test
