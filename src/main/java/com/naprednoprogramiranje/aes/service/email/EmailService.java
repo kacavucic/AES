@@ -20,7 +20,7 @@ public interface EmailService {
      * @param user User to whom email should be sent
      * @param code OTC code used for registration
      *
-     * @throws MessagingException
+     * @throws MessagingException If exception is thrown by MimeMessageHelper
      */
     void sendRegistrationEmail(User user, String code) throws MessagingException;
 
@@ -30,7 +30,7 @@ public interface EmailService {
      * @param user User to whom email should be sent
      * @param code OTC code used for signing
      *
-     * @throws MessagingException
+     * @throws MessagingException If exception is thrown by MimeMessageHelper
      */
     void sendSigningEmail(User user, String code) throws MessagingException;
 }

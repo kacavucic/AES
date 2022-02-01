@@ -29,8 +29,17 @@ import java.util.UUID;
  * @version 1.0
  */
 public class SigningService {
+    /**
+     * First part of final destination path where signed pfd will be saved
+     */
     final String DEST = "src/main/resources/static/";
+    /**
+     * Path to location of private keys used for signature
+     */
     final String KEYSTORE = "src/main/resources/encryption/keystore.jks";
+    /**
+     * Access password for private keys
+     */
     final char[] PASSWORD = "katarina".toCharArray();
 
     /**
@@ -42,8 +51,8 @@ public class SigningService {
      *
      * @return Destination path of the signed document as a string
      *
-     * @throws GeneralSecurityException
-     * @throws IOException
+     * @throws GeneralSecurityException If exception is thrown wile using KeyStore
+     * @throws IOException If exception happens while reading from or writing to files
      */
     public String sign(Path src, String reason, String location)
             throws GeneralSecurityException, IOException {

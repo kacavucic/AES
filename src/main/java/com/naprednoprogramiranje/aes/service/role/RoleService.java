@@ -53,8 +53,8 @@ public interface RoleService {
      * @param allRoles List of roles used for search
      * @param role Role to be searched for
      *
-     * <ul>
      * @return
+     * <ul>
      * 		<li><b>true</b>, if provided role doesn't already exist in database</li>
      * 		<li><b>false</b>, otherwise</li>
      * </ul>
