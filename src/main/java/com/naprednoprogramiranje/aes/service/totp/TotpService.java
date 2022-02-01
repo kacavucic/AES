@@ -31,7 +31,9 @@ public class TotpService {
 
     /**
      * Creates OTC code for provided secret using current timestamp and predefined time bucket
+     *
      * @param secret Secret used for OTC generation
+     *
      * @return Created OTC code with corrresponding details
      */
     public OTC getCodeObject(String secret) {
@@ -52,9 +54,11 @@ public class TotpService {
 
     /**
      * Verifies provided code based on the provided secret
+     *
      * @param secret Secret used for OTC code verification
      * @param code OTC code to be verified
-     * @return Weather provided code is valid or not
+     *
+     * @return Whether provided code is valid or not
      */
     public boolean verifyCode(String secret, String code) {
         return codeVerifier.isValidCode(secret, code);

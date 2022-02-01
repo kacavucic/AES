@@ -2,9 +2,25 @@ package com.naprednoprogramiranje.aes.util;
 
 import java.util.regex.Pattern;
 
+/**
+ * Performs validation of various field types
+ *
+ * @author Katarina Vucic
+ * @version 1.0
+ */
 public class Validators {
 
-    public static void validateFirstname(String firstName) {
+    /**
+     * Validates provided first name
+     *
+     * First name must not be null and must have at least three characters
+     *
+     * @param firstName First name to be validated
+     *
+     * @throws NullPointerException If provided first name is null
+     * @throws RuntimeException If provided first name has less than 3 characters
+     */
+    public static void validateFirstname(String firstName) throws NullPointerException, RuntimeException {
         if (firstName == null) {
             throw new NullPointerException("Firstname is required");
         }
@@ -14,7 +30,17 @@ public class Validators {
         }
     }
 
-    public static void validateLastName(String lastName) {
+    /**
+     * Validates provided last name
+     *
+     * Last name must not be null and must have at least three characters
+     *
+     * @param lastName Last name to be validated
+     *
+     * @throws NullPointerException If provided last name is null
+     * @throws RuntimeException If provided last name has less than 3 characters
+     */
+    public static void validateLastName(String lastName) throws NullPointerException, RuntimeException {
         if (lastName == null) {
             throw new NullPointerException("Lastname is required");
         }
@@ -23,7 +49,17 @@ public class Validators {
         }
     }
 
-    public static void validateUsername(String username) {
+    /**
+     * Validates provided username
+     *
+     * Username must not be null and must have between 5 and 20 characters inclusively
+     *
+     * @param username First name to be validated
+     *
+     * @throws NullPointerException If provided username is null
+     * @throws RuntimeException If provided username has less than 5 or more than 20 characters
+     */
+    public static void validateUsername(String username) throws NullPointerException, RuntimeException {
         if (username == null) {
             throw new NullPointerException("Username is required");
         }
@@ -32,7 +68,15 @@ public class Validators {
         }
     }
 
-    public static void validateEmail(String email) {
+    /**
+     * Validates provided email against RFC standard
+     *
+     * @param email Email to be validated
+     *
+     * @throws NullPointerException If provided email is null
+     * @throws RuntimeException If provided email is not in the format defined by RFC standard
+     */
+    public static void validateEmail(String email) throws NullPointerException, RuntimeException {
         if (email == null) {
             throw new NullPointerException("Email is required");
         }
@@ -42,7 +86,24 @@ public class Validators {
         }
     }
 
-    public static void validatePassword(String password) {
+    /**
+     * Validates provided password
+     *
+     * Password must contain at least:
+     * <ul>
+     *     <li>one digit</li>
+     *     <li>one lowercase character</li>
+     *     <li>one uppercase character</li>
+     *     <li>one special character</li>
+     *     <li>at least 8 characters</li>
+     *     <li>at most 20 characters</li>
+     * </ul>
+     *
+     * @param password Password to be validated
+     * @throws NullPointerException If provided password is null
+     * @throws RuntimeException If provided password in given format
+     */
+    public static void validatePassword(String password) throws NullPointerException, RuntimeException {
         if (password == null) {
             throw new NullPointerException("Password is required");
         }
@@ -52,13 +113,29 @@ public class Validators {
         }
     }
 
-    public static void validateMobile(String mobile) {
+    /**
+     * Validates provided mobile phone number by checking if it is null or not
+     *
+     * @param mobile Mobile phone number to be validated
+     * @throws NullPointerException If provided mobile phone is null
+     */
+    public static void validateMobile(String mobile) throws NullPointerException {
         if (mobile == null) {
             throw new NullPointerException("Mobile is required");
         }
     }
 
-    public static void validateRoleName(String roleName) {
+    /**
+     * Validates provided role name
+     *
+     * Role must start with ROLE_ and must not have more than 20 characters
+     *
+     * @param roleName Role name to be validated
+     *
+     * @throws NullPointerException If provided role name is null
+     * @throws RuntimeException If role name doesn't begin with "ROLE_" or if role name has more than 20 characters
+     */
+    public static void validateRoleName(String roleName) throws NullPointerException, RuntimeException {
         if (roleName == null) {
             throw new NullPointerException("Role name is required");
         }

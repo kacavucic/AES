@@ -10,6 +10,12 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of the UserDetails interface carrying detailed user information
+ *
+ * @author Katarina Vucic
+ * @version 1.0
+ */
 public class UserDetailsImpl implements UserDetails {
 
     private final User user;

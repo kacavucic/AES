@@ -8,6 +8,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implements UserDetailsService used for user access
+ *
+ * @author Katarina Vucic
+ * @version 1.0
+ */
 @Service
 @Slf4j
 public class UserDetailsServiceImpl implements UserDetailsService {

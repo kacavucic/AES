@@ -22,11 +22,29 @@ import java.security.Security;
 import java.security.cert.Certificate;
 import java.util.UUID;
 
+/**
+ * Service used for electronic signing of the PDF document
+ *
+ * @author Katarina Vucic
+ * @version 1.0
+ */
 public class SigningService {
     final String DEST = "src/main/resources/static/";
     final String KEYSTORE = "src/main/resources/encryption/keystore.jks";
     final char[] PASSWORD = "katarina".toCharArray();
 
+    /**
+     * Signs the document with predefined certificate
+     *
+     * @param src Path of the document to be signed
+     * @param reason Reason of the signing. Will be stored in the electronic signature
+     * @param location Location of the signing. Will be stored in the electronic signature
+     *
+     * @return Destination path of the signed document as a string
+     *
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     public String sign(Path src, String reason, String location)
             throws GeneralSecurityException, IOException {
 

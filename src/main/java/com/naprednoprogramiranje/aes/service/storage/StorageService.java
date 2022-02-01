@@ -20,14 +20,18 @@ public interface StorageService {
 
     /**
      * Stores provided file in upload directory
+     *
      * @param file File to be stored
+     *
      * @return Path of the newly stored file
      */
     Path store(MultipartFile file);
 
     /**
      * Resolves path based on provided filename
+     *
      * @param filename Name with the extension of the file whose path will be retrieved
+     *
      * @return Resolved path
      */
     Path load(String filename);
