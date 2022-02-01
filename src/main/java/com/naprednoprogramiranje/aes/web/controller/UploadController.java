@@ -62,15 +62,14 @@ public class UploadController {
         } else {
             Path filepath = storageService.store(document);
 
-            SigningSession signingSession = new SigningSession();
-
             String secret = UUID.randomUUID().toString();
             OTC otc = totpService.getCodeObject(secret);
-
-            signingSession.setId(otc.getId());
-            signingSession.setOtcCode(otc.getOtcCode());
-            signingSession.setTimestamp(otc.getTimestamp());
-            signingSession.setFilepath(filepath.toAbsolutePath().toString());
+            SigningSession signingSession = SigningSession.builder()
+                    .id(secret)
+                    .filepath(filepath.toAbsolutePath().toString())
+                    .otcCode(otc.getOtcCode())
+                    .timestamp(otc.getTimestamp())
+                    .build();
 
             emailService.sendSigningEmail(user, signingSession.getOtcCode());
 

@@ -6,7 +6,6 @@ import com.naprednoprogramiranje.aes.service.role.RoleService;
 import com.naprednoprogramiranje.aes.service.user.UserService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

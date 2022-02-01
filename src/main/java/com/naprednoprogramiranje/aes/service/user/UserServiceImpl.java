@@ -6,14 +6,12 @@ import com.naprednoprogramiranje.aes.service.role.RoleService;
 import com.naprednoprogramiranje.aes.web.model.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 @Transactional
@@ -23,13 +21,11 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final RoleService roleService;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
-
 
     @Override
     public Optional<User> findById(Long id) {
@@ -71,7 +67,7 @@ public class UserServiceImpl implements UserService {
                 .lastName(userDto.getLastName())
                 .username(userDto.getUsername())
                 .email(userDto.getEmail())
-                .password(bCryptPasswordEncoder.encode(userDto.getPassword()))
+                .password(userDto.getPassword())
                 .enabled(userDto.isEnabled())
                 .mobile(userDto.getMobile())
                 .roles(Collections.singletonList(roleService.findByRoleName("ROLE_USER")))
@@ -89,7 +85,7 @@ public class UserServiceImpl implements UserService {
                 .lastName(userDto.getLastName())
                 .username(userDto.getUsername())
                 .email(userDto.getEmail())
-                .password(bCryptPasswordEncoder.encode(userDto.getPassword()))
+                .password(userDto.getPassword())
                 .mobile(userDto.getMobile())
                 .build();
     }

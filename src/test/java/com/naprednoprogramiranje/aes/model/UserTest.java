@@ -76,13 +76,12 @@ class UserTest {
             "Katarina,Vucic,kacavucic,ABC123$$$,vucic.kat@gmail.com,0601234567",
             "Katarina,Vucic,kacavucic,ABC$$$$$$,vucic.kat@gmail.com,0601234567",
             "Katarina,Vucic,kacavucic,javaREGEX123,vucic.kat@gmail.com,0601234567",
-            "Katarina,Vucic,kacavucic,javaREGEX123,vucic.kat@gmail.com,0601234567",
             "Katarina,Vucic,kacavucic,________,vucic.kat@gmail.com,0601234567",
             "Katarina,Vucic,kacavucic,--------,vucic.kat@gmail.com,0601234567",
             "Katarina,Vucic,kacavucic,' ',vucic.kat@gmail.com,0601234567",
             "Katarina,Vucic,kacavucic,'',vucic.kat@gmail.com,0601234567",
             // email
-            "Katarina,Vucic,kacavucic,Abc12345!,vucic.kat_gmail.com,0601234567", // TODO email test cases
+            "Katarina,Vucic,kacavucic,Abc12345!,vucic.kat_gmail.com,0601234567"
     })
     void testBuilderInvalid(String firstName, String lastName, String username, String password, String email, String mobile) {
         assertThrows(RuntimeException.class, () -> User.builder()

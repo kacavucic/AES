@@ -1,14 +1,11 @@
 package com.naprednoprogramiranje.aes.service.storage;
 
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,7 +23,7 @@ public class StorageServiceImpl implements StorageService {
     @Override
     public void init() {
         try {
-            Files.createDirectories(rootLocation);
+            Files.createDirectories(getRootLocation());
         } catch (IOException e) {
             throw new RuntimeException("Could not initialize storage", e);
         }
@@ -38,7 +35,7 @@ public class StorageServiceImpl implements StorageService {
             if (file.isEmpty()) {
                 throw new RuntimeException("Failed to store empty file.");
             }
-            Path destinationFile = this.rootLocation.resolve(
+            Path destinationFile = this.getRootLocation().resolve(
                             Paths.get(file.getOriginalFilename()))
                     .normalize().toAbsolutePath();
             if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
@@ -57,9 +54,9 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public Path load(String filename) {
-        return rootLocation.resolve(filename);
+        return getRootLocation().resolve(filename);
     }
-
+/*
     @Override
     public Resource loadAsResource(String filename) {
         try {
@@ -74,11 +71,14 @@ public class StorageServiceImpl implements StorageService {
         } catch (MalformedURLException e) {
             throw new RuntimeException("Could not read file: " + filename, e);
         }
-    }
+    }*/
 
     @Override
     public void deleteAll() {
-        FileSystemUtils.deleteRecursively(rootLocation.toFile());
+        FileSystemUtils.deleteRecursively(getRootLocation().toFile());
     }
 
+    public Path getRootLocation() {
+        return rootLocation;
+    }
 }

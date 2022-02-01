@@ -2,7 +2,7 @@ package com.naprednoprogramiranje.aes.web.model;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -11,8 +11,8 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 public class CodeVerificationDto {
-    @NotBlank(message = "OTC Code is required")
+    @NotNull(message = "OTC Code is required")
     private String otcCode;
-    @NotBlank(message = "Username is required")
+    @NotNull(message = "Username is required")
     private String username;
 }

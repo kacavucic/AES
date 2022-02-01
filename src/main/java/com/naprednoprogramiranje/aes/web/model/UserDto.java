@@ -3,7 +3,7 @@ package com.naprednoprogramiranje.aes.web.model;
 import com.naprednoprogramiranje.aes.model.Role;
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
@@ -17,22 +17,22 @@ public class UserDto {
 
     private Long id;
 
-    @NotBlank(message = "First name is required") // TODO Koristi NotNull umesto NotBlank
+    @NotNull(message = "First name is required")
     private String firstName;
 
-    @NotBlank(message = "Last name is required")
+    @NotNull(message = "Last name is required")
     private String lastName;
 
-    @NotBlank(message = "Email is required")
+    @NotNull(message = "Email is required")
     private String email;
 
-    @NotBlank(message = "Mobile is required")
+    @NotNull(message = "Mobile is required")
     private String mobile;
 
-    @NotBlank(message = "Username is required")
+    @NotNull(message = "Username is required")
     private String username;
 
-    @NotBlank(message = "Password is required")
+    @NotNull(message = "Password is required")
     private String password;
 
     private List<Role> roles;

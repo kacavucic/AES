@@ -56,7 +56,7 @@ public class RegisterController {
             User user = userService.createNewAccount(userDto);
             user.setEnabled(false);
             userService.save(user);
-            String code = totpService.getCode(user.getEmail());
+            String code = totpService.getCodeObject(user.getEmail()).getOtcCode();
             emailService.sendRegistrationEmail(user, code);
             CodeVerificationDto codeVerificationDto = new CodeVerificationDto();
             codeVerificationDto.setUsername(user.getUsername());
