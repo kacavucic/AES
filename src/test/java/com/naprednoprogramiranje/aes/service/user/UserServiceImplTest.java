@@ -189,34 +189,35 @@ public class UserServiceImplTest {
         assertEquals(user.getUsername(), userDto.getUsername());
         assertEquals(user.getEmail(), userDto.getEmail());
         assertNotNull(user.getPassword());
-        assertNotNull(user.getPassword().length() > userDto.getUsername().length());
+        assertTrue(user.getPassword().length() > userDto.getPassword().length());
         assertEquals(user.isEnabled(), userDto.isEnabled());
     }
 
     @Test
     public void testUpdateUser() {
+        User initialUser = User.builder()
+                .firstName("FIRST_NAME")
+                .lastName("LAST_NAME")
+                .username("USERNAME")
+                .password("Hello_world$123")
+                .email("email@com.com")
+                .mobile("0601234567")
+                .build();
         when(userService.findById(1l))
-                .thenReturn(Optional.ofNullable(User.builder()
-                        .firstName("FIRST_NAME")
-                        .lastName("LAST_NAME")
-                        .username("USERNAME")
-                        .password("Hello_world$123")
-                        .email("email@com.com")
-                        .mobile("0601234567")
-                        .build()));
-        Optional<User> tmpUserOpt = userService.findById(1l);
-        assertTrue(tmpUserOpt.isPresent());
-        User tmpUser = tmpUserOpt.get();
+                .thenReturn(Optional.ofNullable(initialUser));
         UserDto userDto = new UserDto(1l, "FIRST", "LAST", "email@com.com", "0601234567", "USERNAME", "Pass123!", null, true);
-        User user = userService.updateUser(userDto);
-        assertNotNull(user);
-        assertNotEquals(user, tmpUser);
-        assertEquals(user.getFirstName(), userDto.getFirstName());
-        assertEquals(user.getLastName(), userDto.getLastName());
-        assertEquals(user.getMobile(), userDto.getMobile());
-        assertEquals(user.getUsername(), userDto.getUsername());
-        assertEquals(user.getEmail(), userDto.getEmail());
-        assertNotNull(user.getPassword());
-        assertNotNull(user.getPassword().length() > userDto.getUsername().length());
+        User updatedUser = userService.updateUser(userDto);
+        assertNotNull(updatedUser);
+
+        assertNotEquals(updatedUser, initialUser);
+        assertEquals(updatedUser.getId(), initialUser.getId());
+
+        assertEquals(updatedUser.getFirstName(), userDto.getFirstName());
+        assertEquals(updatedUser.getLastName(), userDto.getLastName());
+        assertEquals(updatedUser.getMobile(), userDto.getMobile());
+        assertEquals(updatedUser.getUsername(), userDto.getUsername());
+        assertEquals(updatedUser.getEmail(), userDto.getEmail());
+        assertNotNull(updatedUser.getPassword());
+        assertTrue(updatedUser.getPassword().length() > userDto.getPassword().length());
     }
 }

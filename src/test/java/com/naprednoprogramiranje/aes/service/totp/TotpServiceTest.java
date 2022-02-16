@@ -18,7 +18,11 @@ public class TotpServiceTest {
         assertNotNull(otc.getOtcCode());
         boolean codeValid = service.verifyCode(secret, otc.getOtcCode());
         assertTrue(codeValid);
+
         boolean codeInvalid = service.verifyCode("SOME_OTHER_SECRET", otc.getOtcCode());
         assertFalse(codeInvalid);
+
+        boolean codeInvalid2 = service.verifyCode(secret, "1");
+        assertFalse(codeInvalid2);
     }
 }

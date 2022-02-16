@@ -43,7 +43,7 @@ class EmailServiceImplTest {
     @Test
     void sendRegistrationEmail() throws MessagingException {
         when(templateEngine.process(eq("registrationEmail.html"), any(IContext.class)))
-                .thenReturn("Registration mail sent");
+                .thenReturn("Registration mail content");
         when(mailSender.createMimeMessage())
                 .thenReturn(new MimeMessage(Session.getInstance(new Properties())));
         User user = User.builder()
@@ -68,7 +68,7 @@ class EmailServiceImplTest {
     @Test
     void sendSigningEmail() throws MessagingException {
         when(templateEngine.process(eq("signingEmail.html"), any(IContext.class)))
-                .thenReturn("Signing mail sent");
+                .thenReturn("Signing mail content");
         when(mailSender.createMimeMessage())
                 .thenReturn(new MimeMessage(Session.getInstance(new Properties())));
         User user = User.builder()

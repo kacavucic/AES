@@ -35,11 +35,17 @@ public class StorageServiceImpl implements StorageService {
             if (file.isEmpty()) {
                 throw new RuntimeException("Failed to store empty file.");
             }
-            Path destinationFile = this.getRootLocation().resolve(
-                            Paths.get(file.getOriginalFilename()))
+            Path destinationFile = this.getRootLocation()
+                    .resolve(Paths.get(file.getOriginalFilename()))
                     .normalize().toAbsolutePath();
             if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
                 // This is a security check
+                /*
+                upload-dir
+                    file.txt
+                    nesto/file.txt
+                    /../../file.txt
+                 */
                 throw new RuntimeException("Cannot store file outside current directory.");
             }
             try (InputStream inputStream = file.getInputStream()) {
@@ -54,24 +60,8 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public Path load(String filename) {
-        return getRootLocation().resolve(filename);
+        return getRootLocation().resolve(filename).normalize();
     }
-/*
-    @Override
-    public Resource loadAsResource(String filename) {
-        try {
-            Path file = load(filename);
-            Resource resource = new UrlResource(file.toUri());
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            } else {
-                throw new RuntimeException("Could not read file: " + filename);
-
-            }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Could not read file: " + filename, e);
-        }
-    }*/
 
     @Override
     public void deleteAll() {

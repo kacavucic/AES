@@ -81,7 +81,7 @@ public class Validators {
             throw new NullPointerException("Email is required");
         }
 
-        if (!emailValid(email)) {
+        if (!emailValid(email.trim())) {
             throw new RuntimeException("Email must be in valid format");
         }
     }
@@ -108,7 +108,7 @@ public class Validators {
             throw new NullPointerException("Password is required");
         }
 
-        if (!passwordValid(password)) {
+        if (!passwordValid(password.trim())) {
             throw new RuntimeException("Password must contain at least one digit, one lowercase character, one uppercase character, one special character and must contain at least 8 and at most 20 characters");
         }
     }
@@ -139,7 +139,7 @@ public class Validators {
         if (roleName == null) {
             throw new NullPointerException("Role name is required");
         }
-        if (!roleName.startsWith("ROLE_") || roleName.length() > 20) {
+        if (!roleName.trim().startsWith("ROLE_") || roleName.trim().length() > 20) {
             throw new RuntimeException("Role name must start with <ROLE_> and must not contain more than 20 characters");
         }
     }

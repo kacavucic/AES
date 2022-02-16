@@ -49,6 +49,10 @@ body {
     font-family: Helvetica, sans-serif;
 }
 
+.home-inner{
+    overflow-y: scroll;
+}
+
 footer {
     background-color: darkgrey;
     position: fixed;

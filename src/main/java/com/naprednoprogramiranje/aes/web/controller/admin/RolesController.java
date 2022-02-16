@@ -39,7 +39,7 @@ public class RolesController {
     }
 
     @PostMapping("/roles/newRole")
-    public String saveNewRole(@ModelAttribute("newRole") @Valid final Role newRole,
+    public String saveNewRole(@ModelAttribute("newRole") @Valid final RoleDto newRole,
                               BindingResult bindingResult,
                               RedirectAttributes redirectAttributes) {
         boolean roleNameAlreadyExists = roleService.findByRoleName(newRole.getRoleName()) != null;
@@ -49,7 +49,10 @@ public class RolesController {
         if (roleNameAlreadyExists) bindingResult.rejectValue("name", "roleNameAlreadyExists");
         if (hasErrors) return formWithErrors;
 
-        roleService.save(newRole);
+        Role role = Role.builder()
+                .roleName(newRole.getRoleName())
+                .build();
+        roleService.save(role);
         redirectAttributes.addFlashAttribute("roleHasBeenSaved", true);
         return REDIRECT_ADMIN_PAGE_ROLES;
     }

@@ -30,6 +30,6 @@ public class UserDetailsImplTest {
         UserDetailsImpl userDetails = new UserDetailsImpl(user);
         assertNotNull(userDetails);
         assertEquals(userDetails.getUser(), user); // tests all subsequent props
-        assertEquals(userDetails.getAuthorities().size(), roles.size()); // won't go through entire list, but only to assert number of roles
+        assertEquals(userDetails.getAuthorities().size(), roles.size()); // won't go through entire list, but only to assert number of role
     }
 }

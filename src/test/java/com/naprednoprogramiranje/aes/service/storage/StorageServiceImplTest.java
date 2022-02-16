@@ -63,7 +63,7 @@ public class StorageServiceImplTest {
     @Test
     public void testStoreInvalid() throws IOException {
         // Cannot store file outside current directory.
-        MultipartFile multipartFile = new MockMultipartFile(testFilePath, new FileInputStream(new File(testFilePath)));
+        MultipartFile multipartFile = new MockMultipartFile(testFilePath, "/../../testPdf.pdf", "application/pdf", new FileInputStream(new File(testFilePath)));
         RuntimeException ex1 = assertThrows(RuntimeException.class, () -> storageServiceImpl.store(multipartFile));
         assertEquals(ex1.getMessage(), "Cannot store file outside current directory.");
         // Failed to store empty file.
@@ -74,14 +74,10 @@ public class StorageServiceImplTest {
 
     @Test
     public void testLoad() {
-        Path resolvedCmp = Paths.get(storageProps.getLocation()).resolve("TEST");
+        Path resolvedCmp = Paths.get(storageProps.getLocation()).resolve("TEST").normalize();
         Path loaded = storageServiceImpl.load("TEST");
         assertEquals(resolvedCmp, loaded);
     }
-
-    /*@Test
-    public void testLoadAsResource() {
-    }*/
 
     @Test
     public void testDeleteAll() throws IOException {

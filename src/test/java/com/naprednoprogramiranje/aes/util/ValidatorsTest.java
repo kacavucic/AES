@@ -32,7 +32,7 @@ public class ValidatorsTest {
 
     @Test
     public void testValidateLastname() {
-        Validators.validateLastName("LASTTNAME");
+        Validators.validateLastName("LASTNAME");
     }
 
     @ParameterizedTest

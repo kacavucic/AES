@@ -31,6 +31,13 @@ class UserTest {
 
     @ParameterizedTest
     @CsvSource({
+            // first name ok
+            "Kat,Vucic,kacavucic,AAAbbbccc@123,vucic.kat@gmail.com,0601234567",
+            // last name ok
+            "Katarina,Vuc,kacavucic,AAAbbbccc@123,vucic.kat@gmail.com,0601234567",
+            // username ok
+            "Katarina,Vucic,kacav,AAAbbbccc@123,vucic.kat@gmail.com,0601234567",
+            "Katarina,Vucic,kacavucickacavucicka,AAAbbbccc@123,vucic.kat@gmail.com,0601234567",
             // passwords ok
             "Katarina,Vucic,kacavucic,AAAbbbccc@123,vucic.kat@gmail.com,0601234567",
             "Katarina,Vucic,kacavucic,Hello_world$123,vucic.kat@gmail.com,0601234567",
@@ -54,34 +61,37 @@ class UserTest {
         assertEquals(user.getFirstName(), firstName);
         assertEquals(user.getLastName(), lastName);
         assertEquals(user.getUsername(), username);
-        assertNotNull(user.getPassword());
+        assertNotNull(user.getPassword()); // because password is encrypted after validation and before setting
         assertEquals(user.getEmail(), email);
         assertEquals(user.getMobile(), mobile);
     }
 
     @ParameterizedTest
     @CsvSource({
-            // firstname
+            // firstname less than 3 characters
             "Ka,Vucic,kacavucic,Abc12345!,vucic.kat@gmail.com,0601234567",
-            // lastname
+            // lastname less than 3 characters
             "Katarina,Vu,kacavucic,Abc12345!,vucic.kat@gmail.com,0601234567",
             // username
-            "Katarina,Vucic,kaca,Abc12345!,vucic.kat@gmail.com,0601234567",
-            "Katarina,Vucic,kacavucickacavucickac,Abc12345!,vucic.kat@gmail.com,0601234567",
+            "Katarina,Vucic,kaca,Abc12345!,vucic.kat@gmail.com,0601234567", // less than 5 characters
+            "Katarina,Vucic,kacavucickacavucickac,Abc12345!,vucic.kat@gmail.com,0601234567", // more than 20 characters
             // password
-            "Katarina,Vucic,kacavucic,12345678,vucic.kat@gmail.com,0601234567",
-            "Katarina,Vucic,kacavucic,abcdefgh,vucic.kat@gmail.com,0601234567",
-            "Katarina,Vucic,kacavucic,ABCDEFGH,vucic.kat@gmail.com,0601234567",
-            "Katarina,Vucic,kacavucic,abc123$$$,vucic.kat@gmail.com,0601234567",
-            "Katarina,Vucic,kacavucic,ABC123$$$,vucic.kat@gmail.com,0601234567",
-            "Katarina,Vucic,kacavucic,ABC$$$$$$,vucic.kat@gmail.com,0601234567",
-            "Katarina,Vucic,kacavucic,javaREGEX123,vucic.kat@gmail.com,0601234567",
-            "Katarina,Vucic,kacavucic,________,vucic.kat@gmail.com,0601234567",
-            "Katarina,Vucic,kacavucic,--------,vucic.kat@gmail.com,0601234567",
-            "Katarina,Vucic,kacavucic,' ',vucic.kat@gmail.com,0601234567",
-            "Katarina,Vucic,kacavucic,'',vucic.kat@gmail.com,0601234567",
+            "Katarina,Vucic,kacavucic,12345678,vucic.kat@gmail.com,0601234567", // only digits
+            "Katarina,Vucic,kacavucic,abcdefgh,vucic.kat@gmail.com,0601234567", // only lowercase
+            "Katarina,Vucic,kacavucic,ABCDEFGH,vucic.kat@gmail.com,0601234567", // only uppercase
+            "Katarina,Vucic,kacavucic,!!!!!!!!,vucic.kat@gmail.com,0601234567", // only special characters
+            "Katarina,Vucic,kacavucic,abcdefg,vucic.kat@gmail.com,0601234567", // less than 8 characters
+            "Katarina,Vucic,kacavucic,abcdefghijklmnopqrstu,vucic.kat@gmail.com,0601234567", // more than 20 characters
+            "Katarina,Vucic,kacavucic,AAAbbbccc@,vucic.kat@gmail.com,0601234567", // no digits
+            "Katarina,Vucic,kacavucic,AAABBBCCC@123,vucic.kat@gmail.com,0601234567", // no lowercase
+            "Katarina,Vucic,kacavucic,aaabbbccc@123,vucic.kat@gmail.com,0601234567", // no uppercase
+            "Katarina,Vucic,kacavucic,AAAbbbccc123,vucic.kat@gmail.com,0601234567", // no special character
             // email
-            "Katarina,Vucic,kacavucic,Abc12345!,vucic.kat_gmail.com,0601234567"
+            "Katarina,Vucic,kacavucic,Abc12345!,vucic.kat_gmail.com,0601234567",
+            "Katarina,Vucic,kacavucic,Abc12345!,vucic.kat@gmailcom,0601234567",
+            "Katarina,Vucic,kacavucic,Abc12345!,vucic.kat_gmail.Com,0601234567",
+            "Katarina,Vucic,kacavucic,Abc12345!,vucic.ka t_gmail.com,0601234567",
+            "Katarina,Vucic,kacavucic,Abc12345!,vucic.kat@@gmail.com,0601234567",
     })
     void testBuilderInvalid(String firstName, String lastName, String username, String password, String email, String mobile) {
         assertThrows(RuntimeException.class, () -> User.builder()

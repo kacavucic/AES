@@ -65,7 +65,7 @@ public class SigningSessionTest {
                 .id("SESSION_SECRET")
                 .otcCode("123456")
                 .filepath("SESSION_ONE_FILEPATH")
-                .timestamp(System.currentTimeMillis())
+                .timestamp(5555555)
                 .build();
 
         SigningSession signingSessionCmp = SigningSession.builder()
@@ -100,20 +100,25 @@ public class SigningSessionTest {
         assertEquals(signingSession.hashCode(), signingSessionCmp.hashCode());
     }
 
-    @Test
-    public void testHashCodeDifferent() {
-        long ts = System.currentTimeMillis();
+    @ParameterizedTest
+    @CsvSource({
+            "SESSION_SECRET2, 123456, SESSION_ONE_FILEPATH, 5555555",
+            "SESSION_SECRET, 123457, SESSION_ONE_FILEPATH, 5555555",
+            "SESSION_SECRET, 123456, SESSION_ONE_FILEPATH2, 5555555",
+            "SESSION_SECRET, 123456, SESSION_ONE_FILEPATH, 5555556",
+    })
+    public void testHashCodeDifferent(String id, String otc, String filepath, long ts) {
         signingSession = SigningSession.builder()
                 .id("SESSION_SECRET")
                 .otcCode("123456")
                 .filepath("SESSION_ONE_FILEPATH")
-                .timestamp(ts)
+                .timestamp(5555555)
                 .build();
 
         SigningSession signingSessionCmp = SigningSession.builder()
-                .id("SESSION_SECRET2")
-                .otcCode("123452")
-                .filepath("SESSION_ONE_FILEPATH2")
+                .id(id)
+                .otcCode(otc)
+                .filepath(filepath)
                 .timestamp(ts)
                 .build();
         assertNotNull(signingSession);
