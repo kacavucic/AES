@@ -145,7 +145,7 @@ public class Validators {
     }
 
     private static boolean passwordValid(String password) {
-        String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!^&+=])(?=\\S+$).{8,}$";
+        String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!^&+=])(?=\\S+$).{8,20}$";
         return Pattern.compile(pattern)
                 .matcher(password)
                 .matches();

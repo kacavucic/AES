@@ -97,7 +97,8 @@ public class SigningService {
         IExternalDigest digest = new BouncyCastleDigest();
 
         // Sign the document using the detached mode, CMS or CAdES equivalent.
-        signer.signDetached(digest, pks, chain, null, null, null, 0, PdfSigner.CryptoStandard.CMS);
+        signer.signDetached(digest, pks, chain, null, null, null,
+                0, PdfSigner.CryptoStandard.CMS);
 
         return finalDest;
     }

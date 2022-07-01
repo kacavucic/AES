@@ -81,7 +81,7 @@ class UserTest {
             "Katarina,Vucic,kacavucic,ABCDEFGH,vucic.kat@gmail.com,0601234567", // only uppercase
             "Katarina,Vucic,kacavucic,!!!!!!!!,vucic.kat@gmail.com,0601234567", // only special characters
             "Katarina,Vucic,kacavucic,abcdefg,vucic.kat@gmail.com,0601234567", // less than 8 characters
-            "Katarina,Vucic,kacavucic,abcdefghijklmnopqrstu,vucic.kat@gmail.com,0601234567", // more than 20 characters
+            "Katarina,Vucic,kacavucic,Abc12345!Abc12345!Abc12345!Abc12345!Abc12345!Abc12345!,vucic.kat@gmail.com,0601234567", // more than 20 characters
             "Katarina,Vucic,kacavucic,AAAbbbccc@,vucic.kat@gmail.com,0601234567", // no digits
             "Katarina,Vucic,kacavucic,AAABBBCCC@123,vucic.kat@gmail.com,0601234567", // no lowercase
             "Katarina,Vucic,kacavucic,aaabbbccc@123,vucic.kat@gmail.com,0601234567", // no uppercase

@@ -122,7 +122,7 @@ public class UploadController {
                 File signingFile = new File(session.getFilepath());
                 HashCode hash = Files.hash(signingFile, Hashing.md5());
 
-                String reason = "On behalf of " + user.getFirstName() + " " + user.getLastName() + "\n"
+                String reason = "On behalf of " + user.getFirstName() + " " + user.getLastName() + ", " + user.getEmail() + "\n"
                         + "Using OTC " + session.getOtcCode() + " and timestamp " + session.getTimestamp() + "\n" +
                         "Hash value of document: " + hash;
 

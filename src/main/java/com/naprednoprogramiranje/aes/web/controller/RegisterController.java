@@ -69,8 +69,9 @@ public class RegisterController {
 
     @PostMapping(value = "/verify-registration")
     public ModelAndView verifyRegistration(ModelAndView modelAndView,
-                                           @ModelAttribute("codeVerificationDto") @Valid final CodeVerificationDto codeVerificationDto,
-                                           BindingResult bindingResult) throws MessagingException {
+                                           @ModelAttribute("codeVerificationDto")
+                                           @Valid final CodeVerificationDto codeVerificationDto,
+                                           BindingResult bindingResult) {
 
         User user = userService.findByUsername(codeVerificationDto.getUsername());
 
@@ -82,17 +83,13 @@ public class RegisterController {
         boolean codeVerified = totpService.verifyCode(user.getEmail(), codeVerificationDto.getOtcCode());
         if (!codeVerified) {
             bindingResult.rejectValue("otcCode", "invalidOTC");
-//            String code = totpService.getCode(user.getEmail());
-//            emailService.sendRegistrationEmail(user, code);
-//            CodeVerificationDto c = new CodeVerificationDto();
-//            c.setUsername(user.getUsername());
-//            modelAndView.addObject("codeVerificationDto", c);
         }
 
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("website/registration/verifyRegistration");
         } else {
-            modelAndView.addObject("confirmationMessage", user.getFirstName() + ", you have been registered successfully.");
+            modelAndView.addObject("confirmationMessage",
+                    user.getFirstName() + ", you have been registered successfully.");
             modelAndView.setViewName("website/registration/registered");
             user.setEnabled(true);
             userService.save(user);

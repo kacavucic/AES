@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.security.SecureRandom;
 import java.util.List;
 
 /**
@@ -69,8 +70,7 @@ public class User {
      * User's password
      */
     @JsonIgnore
-    @Column(length = 128, nullable = false)
-    @Size(min = 8, max = 128)
+    @Column(length = 60, nullable = false)
     private String password;
 
     /**
@@ -112,7 +112,7 @@ public class User {
             Validators.validatePassword(super.password);
             Validators.validateMobile(super.mobile);
 
-            super.password = new BCryptPasswordEncoder().encode(super.password);
+            super.password = new BCryptPasswordEncoder(12,new SecureRandom()).encode(super.password);
 
             return super.build();
         }
